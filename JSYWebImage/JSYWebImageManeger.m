@@ -23,9 +23,20 @@
 @end
 @implementation JSYWebImageManeger
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveMemoryWarning) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+    }
+    return self;
+}
 
 -(void)downloadImageWithURLSring:(NSString *)URLstr complish:(void (^)(UIImage *image))complish{
-    
+    /**
+     *  断言
+     */
+    NSAssert(complish != nil, @"必须回调");
     /**
      *  内存缓存
      */
@@ -104,7 +115,7 @@
 /**
  *  释放
  */
--(void)dealloc{
+-(void)receiveMemoryWarning{
     [self.imageCashe removeAllObjects];
     [self.operationCashe removeAllObjects];
     [self.queue cancelAllOperations];
