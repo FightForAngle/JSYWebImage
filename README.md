@@ -1,2 +1,2 @@
 # JSYWebImage
-get image from web
+imitate SD_WebImage
